@@ -51,3 +51,4 @@ func jumping():
 	if is_on_floor() or coyote_jump_timer.time_left > 0.0:
 		if Input.is_action_just_pressed("jump"):
 			velocity.y = jump_velocity
+
