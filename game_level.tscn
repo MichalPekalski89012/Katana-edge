@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://0o0txq77lgid"]
+[gd_scene load_steps=6 format=3 uid="uid://0o0txq77lgid"]
 
 [ext_resource type="Texture2D" uid="uid://bdoefbul37f6v" path="res://tilemapy.png" id="1_o8yuo"]
 [ext_resource type="PackedScene" uid="uid://b4oa4ap6bthgk" path="res://player.tscn" id="2_pgpto"]
+[ext_resource type="PackedScene" uid="uid://c4wv327xk5k87" path="res://obstacles/spikes.tscn" id="3_c05ox"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fjxyr"]
 texture = ExtResource("1_o8yuo")
@@ -228,3 +229,12 @@ layer_0/tile_data = PackedInt32Array(458760, 65536, 0, 458761, 65536, 0, 458762,
 
 [node name="Player" parent="." instance=ExtResource("2_pgpto")]
 position = Vector2(199, 101)
+
+[node name="Spikes" parent="." instance=ExtResource("3_c05ox")]
+position = Vector2(552, 117)
+
+[node name="Spikes2" parent="." instance=ExtResource("3_c05ox")]
+position = Vector2(568, 117)
+
+[node name="Spikes3" parent="." instance=ExtResource("3_c05ox")]
+position = Vector2(584, 117)
