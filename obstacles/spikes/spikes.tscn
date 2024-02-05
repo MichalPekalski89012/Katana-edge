@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://5glcdvywfspx"]
+
+[ext_resource type="Texture2D" uid="uid://dmdi1d2sblyhp" path="res://obstacles/spikes/spikes.png" id="1_gq6r1"]
+[ext_resource type="PackedScene" uid="uid://sfd4hx36yn7v" path="res://obstacles/obstacle_hurtbox.tscn" id="2_ihhrr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_allwm"]
+size = Vector2(16, 5)
+
+[node name="Spikes" type="Node2D"]
+
+[node name="Spikes" type="Sprite2D" parent="."]
+texture = ExtResource("1_gq6r1")
+
+[node name="ObstacleHurtbox" parent="." instance=ExtResource("2_ihhrr")]
+
+[node name="CollisionShape2D" parent="ObstacleHurtbox" index="0"]
+position = Vector2(0, 9.5)
+shape = SubResource("RectangleShape2D_allwm")
+
+[editable path="ObstacleHurtbox"]

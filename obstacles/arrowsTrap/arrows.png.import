@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dmdi1d2sblyhp"
-path="res://.godot/imported/spikes.png-46b42201d793f6dc2088b6baaf31958a.ctex"
+uid="uid://b4ldescic5rbu"
+path="res://.godot/imported/arrows.png-77aa6d0d2ec18e180c1abda36216a513.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://obstacles/spikes.png"
-dest_files=["res://.godot/imported/spikes.png-46b42201d793f6dc2088b6baaf31958a.ctex"]
+source_file="res://obstacles/arrowsTrap/arrows.png"
+dest_files=["res://.godot/imported/arrows.png-77aa6d0d2ec18e180c1abda36216a513.ctex"]
 
 [params]
 

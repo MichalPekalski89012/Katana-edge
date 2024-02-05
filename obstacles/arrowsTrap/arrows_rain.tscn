@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://cwe2uvrxywod2"]
+
+[ext_resource type="Texture2D" uid="uid://b4ldescic5rbu" path="res://obstacles/arrowsTrap/arrows.png" id="1_cgw81"]
+[ext_resource type="Script" path="res://obstacles/arrowsTrap/arrows_rain.gd" id="1_lypg6"]
+[ext_resource type="PackedScene" uid="uid://sfd4hx36yn7v" path="res://obstacles/obstacle_hurtbox.tscn" id="2_86pcf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tdiee"]
+size = Vector2(6, 5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_umgsr"]
+radius = 8.0
+
+[node name="ArrowsRain" type="CharacterBody2D"]
+collision_layer = 8
+script = ExtResource("1_lypg6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_cgw81")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_tdiee")
+
+[node name="ObstacleHurtbox" parent="." instance=ExtResource("2_86pcf")]
+
+[node name="CollisionShape2D" parent="ObstacleHurtbox" index="0"]
+position = Vector2(0, -2)
+shape = SubResource("CircleShape2D_umgsr")
+debug_color = Color(0.937255, 0.109804, 0.568627, 0.862745)
+
+[editable path="ObstacleHurtbox"]

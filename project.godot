@@ -61,6 +61,13 @@ interact={
 2d_physics/layer_1="Player"
 2d_physics/layer_2="Enemy"
 2d_physics/layer_3="World"
+2d_physics/layer_4="Obstacles"
+2d_physics/layer_5="Player_low_hitbox"
+2d_physics/layer_6="Player_mid_hitbox"
+2d_physics/layer_7="Player_high_hitbox"
+2d_physics/layer_8="Enemy_low_hurtbox"
+2d_physics/layer_9="Enemy_mid_hurtbox"
+2d_physics/layer_10="Enemy_high_hurtbox"
 
 [rendering]
 
