@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bj2mufayr8l3q"]
+
+[ext_resource type="Texture2D" uid="uid://cseveidjf680o" path="res://Player/katana.png" id="1_mouhd"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p8ipi"]
+radius = 2.82843
+height = 22.6274
+
+[node name="Katana" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_mouhd")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+rotation = 0.785398
+shape = SubResource("CapsuleShape2D_p8ipi")
