@@ -1,8 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://bhrckvmm5qbe6"]
+[gd_scene load_steps=20 format=3 uid="uid://bhrckvmm5qbe6"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_a4xyi"]
 [ext_resource type="Texture2D" uid="uid://b446i4ywagekt" path="res://Player/player.png" id="2_nsqgt"]
-[ext_resource type="PackedScene" uid="uid://bj2mufayr8l3q" path="res://Player/katana.tscn" id="3_us2e8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r2xm4"]
 atlas = ExtResource("2_nsqgt")
@@ -94,38 +93,26 @@ length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Katana:visible")
+tracks/0/path = NodePath("Hitbox/CollisionShape2D:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [true, false]
+"values": [false, true]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Katana:rotation")
+tracks/1/path = NodePath("Hitbox:collision_layer")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [-2.35619, 0.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Katana:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(-12, -14), Vector2(18, -6)]
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [64]
 }
 
 [sub_resource type="Animation" id="Animation_7p46u"]
@@ -133,45 +120,95 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Katana:visible")
+tracks/0/path = NodePath("Hitbox/CollisionShape2D:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Katana:rotation")
+tracks/1/path = NodePath("Hitbox:collision_layer")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [-2.35619]
+"update": 1,
+"values": [64]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Katana:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
+
+[sub_resource type="Animation" id="Animation_xyrbe"]
+resource_name = "Player_mid_attack"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hitbox/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hitbox:collision_layer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-12, -14)]
+"update": 1,
+"values": [32]
+}
+
+[sub_resource type="Animation" id="Animation_yyelq"]
+resource_name = "Player_low_attack"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hitbox/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hitbox:collision_layer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [128]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_y0y84"]
 _data = {
 "Player_high_attack": SubResource("Animation_6ixub"),
+"Player_low_attack": SubResource("Animation_yyelq"),
+"Player_mid_attack": SubResource("Animation_xyrbe"),
 "RESET": SubResource("Animation_7p46u")
 }
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t23y2"]
+radius = 8.0
+height = 24.0
 
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 4
@@ -196,7 +233,12 @@ libraries = {
 "": SubResource("AnimationLibrary_y0y84")
 }
 
-[node name="Katana" parent="." instance=ExtResource("3_us2e8")]
-visible = false
-position = Vector2(-12, -14)
-rotation = -2.35619
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(19, 0)
+collision_layer = 64
+collision_mask = 2
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CapsuleShape2D_t23y2")
+disabled = true

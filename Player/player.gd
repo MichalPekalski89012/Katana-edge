@@ -12,6 +12,7 @@ extends CharacterBody2D
 
 @onready var animated_sprite_2d = $AnimatedSprite2D
 @onready var coyote_jump_timer = $CoyoteJumpTimer
+@onready var animation_player = $AnimationPlayer
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var direction = 0
@@ -19,6 +20,7 @@ var was_on_floor
 var just_left_edge
 
 func _physics_process(delta):
+	attack()
 	if not is_on_floor():
 		velocity.y += gravity * delta
 		air_resistance(direction,delta)
@@ -52,3 +54,6 @@ func jumping():
 		if Input.is_action_just_pressed("jump"):
 			velocity.y = jump_velocity
 
+func attack():
+	if Input.is_action_pressed("attack"):
+		animation_player.play("Player_high_attack")
