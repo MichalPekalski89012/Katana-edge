@@ -18,8 +18,10 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var direction = 0
 var was_on_floor
 var just_left_edge
+var is_sliding
 
 func _physics_process(delta):
+	sliding()
 	attack()
 	if not is_on_floor():
 		velocity.y += gravity * delta
@@ -54,6 +56,18 @@ func jumping():
 		if Input.is_action_just_pressed("jump"):
 			velocity.y = jump_velocity
 
+func sliding():
+	if Input.is_action_pressed("down") and is_on_floor():
+		is_sliding = true
+	elif Input.is_action_just_released("down") and is_on_floor():
+		is_sliding = false
+
 func attack():
-	if Input.is_action_pressed("attack"):
+	if Input.is_action_pressed("attack") and not is_on_floor():
 		animation_player.play("Player_high_attack")
+		
+	elif Input.is_action_pressed("attack") and is_sliding:
+		animation_player.play("Player_low_attack")
+		
+	elif Input.is_action_pressed("attack"):
+		animation_player.play("Player_mid_attack")
