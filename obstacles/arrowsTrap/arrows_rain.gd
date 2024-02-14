@@ -1,9 +1,7 @@
-extends CharacterBody2D
 class_name ArrowsRain
+extends CharacterBody2D
 
 @export var speed_modifier = 7.5
-
-
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
