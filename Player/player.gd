@@ -32,7 +32,6 @@ enum {
 var move_state = RUN
 
 func _physics_process(delta):
-	print(coyote_jump_timer.time_left)
 	attack()
 	if not is_on_floor():
 		velocity.y += gravity * delta
@@ -46,7 +45,7 @@ func _physics_process(delta):
 		JUMPSLIDE: jump_slide_state()
 
 func run_state(direction,delta):
-	
+	print("biegam!!!")
 	jumping()
 	if Input.is_action_pressed("down") and is_on_floor():
 		jump_slide_timer.start()
@@ -70,14 +69,20 @@ func climb_state():
 	pass
 
 func slide_state(delta):
-	if Input.is_action_just_pressed("jump") and jump_slide_timer.time_left == 0.0:
-		move_state = RUN
-	elif Input.is_action_just_pressed("jump") and jump_slide_timer.time_left > 0.0:
-		move_state = JUMPSLIDE
-	elif Input.is_action_just_released("down"):
-		move_state = RUN
-
+	print("sliduje!!!")
 	velocity.x = move_toward(velocity.x, 0, slide_friction * delta)
+#	if Input.is_action_just_pressed("jump") and jump_slide_timer.time_left == 0.0:
+#		move_state = RUN
+#	elif Input.is_action_just_pressed("jump") and jump_slide_timer.time_left > 0.0:
+#		move_state = JUMPSLIDE
+#	elif Input.is_action_just_released("down"):
+#		move_state = RUN
+	if Input.is_action_just_released("down"):
+		if Input.is_action_just_pressed("jump") and jump_slide_timer.time_left > 0.0:
+			move_state = JUMPSLIDE
+		else:
+			move_state = RUN
+
 	move_and_slide()
 
 func jump_slide_state():
