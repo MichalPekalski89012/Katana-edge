@@ -223,6 +223,7 @@ position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_v1bde")
 
 [node name="CoyoteJumpTimer" type="Timer" parent="."]
+one_shot = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 process_callback = 0

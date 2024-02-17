@@ -32,7 +32,7 @@ enum {
 var move_state = RUN
 
 func _physics_process(delta):
-	print(jump_slide_timer.time_left)
+	print(coyote_jump_timer.time_left)
 	attack()
 	if not is_on_floor():
 		velocity.y += gravity * delta
