@@ -3,7 +3,7 @@ extends CharacterBody2D
 @export_category("ground movement")
 @export var acceleration = 250.0
 @export var friction = 1500.0
-@export var slide_friction = 15.0
+@export var slide_friction = 100.0
 @export var max_speed = 150.0
 
 @export_category("air movement")
@@ -21,6 +21,7 @@ var direction = 0
 var was_on_floor
 var just_left_edge
 var is_sliding
+var is_about_to_slidejump = false
 
 enum {
 	RUN,
@@ -32,20 +33,18 @@ enum {
 var move_state = RUN
 
 func _physics_process(delta):
+#	print("Velocity.x:",velocity.x)
 	attack()
-	if not is_on_floor():
-		velocity.y += gravity * delta
-
+	apply_gravity(delta)
 	direction = Input.get_axis("left", "right")
 
 	match move_state:
 		RUN: run_state(direction,delta)
 		CLIMB: climb_state()
 		SLIDE: slide_state(delta)
-		JUMPSLIDE: jump_slide_state()
+		JUMPSLIDE: jump_slide_state(direction,delta)
 
 func run_state(direction,delta):
-	print("biegam!!!")
 	jumping()
 	if Input.is_action_pressed("down") and is_on_floor():
 		jump_slide_timer.start()
@@ -71,22 +70,26 @@ func climb_state():
 func slide_state(delta):
 	print("sliduje!!!")
 	velocity.x = move_toward(velocity.x, 0, slide_friction * delta)
-#	if Input.is_action_just_pressed("jump") and jump_slide_timer.time_left == 0.0:
+
+	if Input.is_action_just_pressed("jump") and jump_slide_timer.time_left > 0.0:
+		is_about_to_slidejump = true
+		velocity.x = max_speed * direction * 3
+		velocity.y = jump_velocity * 1.5
+		move_state = JUMPSLIDE
+#	elif Input.is_action_just_released("down") and not is_about_to_slidejump:
 #		move_state = RUN
-#	elif Input.is_action_just_pressed("jump") and jump_slide_timer.time_left > 0.0:
-#		move_state = JUMPSLIDE
-#	elif Input.is_action_just_released("down"):
-#		move_state = RUN
-	if Input.is_action_just_released("down"):
-		if Input.is_action_just_pressed("jump") and jump_slide_timer.time_left > 0.0:
-			move_state = JUMPSLIDE
-		else:
-			move_state = RUN
+#		print(jump_slide_timer.time_left)
 
 	move_and_slide()
 
-func jump_slide_state():
+func jump_slide_state(direction,delta):
 	print("JUMP sliduje!!!")
+	if not is_on_floor():
+		apply_gravity(delta)
+		move_and_slide()
+	else:
+		move_state = RUN
+
 	
 
 
@@ -101,6 +104,9 @@ func jumping():
 		if Input.is_action_just_pressed("jump"):
 			velocity.y = jump_velocity
 
+func apply_gravity(delta):
+	if not is_on_floor():
+		velocity.y += gravity * delta
 
 func attack():
 	if Input.is_action_pressed("attack") and not is_on_floor():
