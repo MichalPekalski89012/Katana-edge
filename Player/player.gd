@@ -8,7 +8,7 @@ extends CharacterBody2D
 
 @export_category("air movement")
 @export var jump_velocity = -300.0
-@export var air_resistance_value = 150.0
+@export var air_resistance_value = 350.0
 @export var horizontal_air_boost = 250.0
 
 @onready var animated_sprite_2d = $AnimatedSprite2D
@@ -20,8 +20,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var direction = 0
 var was_on_floor
 var just_left_edge
-var is_sliding
-var is_about_to_slidejump = false
+var already_slided
 
 enum {
 	RUN,
@@ -46,6 +45,7 @@ func _physics_process(delta):
 
 func run_state(direction,delta):
 	jumping()
+	air_resistance(delta)
 	if Input.is_action_pressed("down") and is_on_floor():
 		jump_slide_timer.start()
 		move_state = SLIDE
@@ -72,13 +72,12 @@ func slide_state(delta):
 	velocity.x = move_toward(velocity.x, 0, slide_friction * delta)
 
 	if Input.is_action_just_pressed("jump") and jump_slide_timer.time_left > 0.0:
-		is_about_to_slidejump = true
-		velocity.x = max_speed * direction * 3
-		velocity.y = jump_velocity * 1.5
+		velocity.x = max_speed * direction * 2
+		velocity.y = jump_velocity
 		move_state = JUMPSLIDE
-#	elif Input.is_action_just_released("down") and not is_about_to_slidejump:
-#		move_state = RUN
-#		print(jump_slide_timer.time_left)
+	elif Input.is_action_just_released("down") and jump_slide_timer.time_left == 0.0:
+		move_state = RUN
+		print(jump_slide_timer.time_left)
 
 	move_and_slide()
 
@@ -93,8 +92,8 @@ func jump_slide_state(direction,delta):
 	
 
 
-func air_resistance(input_axis,delta):
-	if input_axis == 0 and not is_on_floor():
+func air_resistance(delta):
+	if not is_on_floor():
 		velocity.x = move_toward(velocity.x, 0, air_resistance_value * delta)
 
 func jumping():
@@ -112,7 +111,7 @@ func attack():
 	if Input.is_action_pressed("attack") and not is_on_floor():
 		animation_player.play("Player_high_attack")
 		
-	elif Input.is_action_pressed("attack") and is_sliding:
+	elif Input.is_action_pressed("attack") and move_state==SLIDE:
 		animation_player.play("Player_low_attack")
 		
 	elif Input.is_action_pressed("attack"):
