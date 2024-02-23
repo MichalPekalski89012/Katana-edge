@@ -20,7 +20,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var direction = 0
 var was_on_floor
 var just_left_edge
-var already_slided
+var just_slided = false
 
 enum {
 	RUN,
@@ -46,9 +46,11 @@ func _physics_process(delta):
 func run_state(direction,delta):
 	jumping()
 	air_resistance(delta)
-	if Input.is_action_pressed("down") and is_on_floor():
+	if Input.is_action_pressed("down") and is_on_floor() and not just_slided:
 		jump_slide_timer.start()
 		move_state = SLIDE
+
+	just_slided = false
 
 	if direction:
 		if direction == -1:
@@ -76,6 +78,7 @@ func slide_state(delta):
 		velocity.y = jump_velocity
 		move_state = JUMPSLIDE
 	elif Input.is_action_just_released("down") and jump_slide_timer.time_left == 0.0:
+		just_slided = true
 		move_state = RUN
 		print(jump_slide_timer.time_left)
 
