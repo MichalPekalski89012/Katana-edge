@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bk40vrrpa6kqk"]
+
+[ext_resource type="PackedScene" uid="uid://bvivhwk1q33vq" path="res://Enemies/enemyVariant/enemy.tscn" id="1_6m7fo"]
+
+[node name="EnemyHigh" instance=ExtResource("1_6m7fo")]
+
+[node name="EnemyHurtbox" parent="." index="2"]
+collision_layer = 512
+collision_mask = 64
+
+[editable path="EnemyHurtbox"]
