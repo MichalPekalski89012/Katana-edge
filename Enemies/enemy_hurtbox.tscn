@@ -1,9 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://d1ta125ssf451"]
+[gd_scene load_steps=2 format=3 uid="uid://c3fkgjvbqshsw"]
 
 [ext_resource type="Script" path="res://Enemies/enemy_hurtbox.gd" id="1_jrqpv"]
 
 [node name="EnemyHurtbox" type="Area2D"]
-modulate = Color(1, 0, 0.0156863, 1)
 script = ExtResource("1_jrqpv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
