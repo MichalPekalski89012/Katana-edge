@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://ite74gi87tch"]
+
+[ext_resource type="Texture2D" uid="uid://b446i4ywagekt" path="res://Player/player.png" id="1_tq5eo"]
+[ext_resource type="PackedScene" uid="uid://d1ta125ssf451" path="res://Enemies/enemy_hurtbox.tscn" id="2_78kvf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_65ic4"]
+size = Vector2(20, 21)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_b2n6o"]
+radius = 13.0
+height = 26.0
+
+[node name="Enemy" type="CharacterBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_tq5eo")
+flip_h = true
+hframes = 10
+frame = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_65ic4")
+
+[node name="EnemyHurtbox" parent="." instance=ExtResource("2_78kvf")]
+
+[node name="CollisionShape2D" parent="EnemyHurtbox" index="0"]
+shape = SubResource("CapsuleShape2D_b2n6o")
+
+[editable path="EnemyHurtbox"]

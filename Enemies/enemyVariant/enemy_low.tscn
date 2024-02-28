@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cou44vypoyjr6"]
+
+[ext_resource type="PackedScene" uid="uid://ite74gi87tch" path="res://Enemies/enemyVariant/enemy.tscn" id="1_ycwn4"]
+
+[node name="EnemyLow" instance=ExtResource("1_ycwn4")]
+
+[node name="EnemyHurtbox" parent="." index="2"]
+collision_layer = 128
+collision_mask = 16
+
+[editable path="EnemyHurtbox"]
