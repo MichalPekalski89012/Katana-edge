@@ -68,6 +68,9 @@ interact={
 2d_physics/layer_8="Enemy_low_hurtbox"
 2d_physics/layer_9="Enemy_mid_hurtbox"
 2d_physics/layer_10="Enemy_high_hurtbox"
+2d_physics/layer_11="Player_low_hurtbox"
+2d_physics/layer_12="Player_mid_hurtbox"
+2d_physics/layer_13="Player_high_hurtbox"
 
 [rendering]
 

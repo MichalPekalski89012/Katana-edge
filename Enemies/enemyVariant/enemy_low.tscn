@@ -1,8 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://bjmyvtkktsjcm"]
+[gd_scene load_steps=3 format=3 uid="uid://bjmyvtkktsjcm"]
 
 [ext_resource type="PackedScene" uid="uid://bvivhwk1q33vq" path="res://Enemies/enemyVariant/enemy.tscn" id="1_ycwn4"]
+[ext_resource type="Texture2D" uid="uid://yknwswadyhju" path="res://Enemies/enemyLow.png" id="2_hdjfq"]
 
 [node name="EnemyLow" instance=ExtResource("1_ycwn4")]
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_hdjfq")
+flip_h = false
+hframes = 1
+frame = 0
 
 [node name="EnemyHurtbox" parent="." index="2"]
 collision_layer = 128

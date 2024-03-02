@@ -119,3 +119,7 @@ func attack():
 		
 	elif Input.is_action_pressed("attack"):
 		animation_player.play("Player_mid_attack")
+
+
+func _on_hurtbox_area_entered(area):
+	print("zabili mnie!")

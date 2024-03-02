@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bhrckvmm5qbe6"]
+[gd_scene load_steps=21 format=3 uid="uid://bhrckvmm5qbe6"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_a4xyi"]
 [ext_resource type="Texture2D" uid="uid://b446i4ywagekt" path="res://Player/player.png" id="2_nsqgt"]
@@ -206,6 +206,10 @@ _data = {
 "RESET": SubResource("Animation_7p46u")
 }
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g65dv"]
+radius = 8.0
+height = 26.0
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t23y2"]
 radius = 8.0
 height = 24.0
@@ -219,7 +223,6 @@ sprite_frames = SubResource("SpriteFrames_nwjjo")
 animation = &"run_right"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_v1bde")
 
 [node name="CoyoteJumpTimer" type="Timer" parent="."]
@@ -234,6 +237,12 @@ libraries = {
 "": SubResource("AnimationLibrary_y0y84")
 }
 
+[node name="Hurtbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CapsuleShape2D_g65dv")
+debug_color = Color(1, 0, 0.435294, 0.419608)
+
 [node name="Hitbox" type="Area2D" parent="."]
 position = Vector2(19, 0)
 collision_layer = 64
@@ -246,3 +255,5 @@ disabled = true
 
 [node name="JumpSlideTimer" type="Timer" parent="."]
 one_shot = true
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
