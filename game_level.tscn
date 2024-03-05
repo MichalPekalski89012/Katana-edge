@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bhrckvmm5qbe6" path="res://Player/player.tscn" id="2_pgpto"]
 [ext_resource type="PackedScene" uid="uid://5glcdvywfspx" path="res://obstacles/spikes/spikes.tscn" id="3_fug2j"]
 [ext_resource type="PackedScene" uid="uid://cwe2uvrxywod2" path="res://obstacles/arrowsTrap/arrows_rain.tscn" id="4_u5veb"]
-[ext_resource type="PackedScene" uid="uid://lkar4o1cis01" path="res://Enemies/enemy_placeholder.tscn" id="5_4es1r"]
+[ext_resource type="PackedScene" uid="uid://bk40vrrpa6kqk" path="res://Enemies/enemyVariant/enemy_high.tscn" id="5_rnoxq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fjxyr"]
 texture = ExtResource("1_o8yuo")
@@ -244,5 +244,5 @@ position = Vector2(584, 116)
 [node name="ArrowsRain" parent="." instance=ExtResource("4_u5veb")]
 position = Vector2(199, -9)
 
-[node name="EnemyPlaceholder" parent="." instance=ExtResource("5_4es1r")]
-position = Vector2(204, 100)
+[node name="EnemyHigh" parent="." instance=ExtResource("5_rnoxq")]
+position = Vector2(194, 100)

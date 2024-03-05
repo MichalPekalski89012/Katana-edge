@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://bvivhwk1q33vq"]
+[gd_scene load_steps=11 format=3 uid="uid://bvivhwk1q33vq"]
 
 [ext_resource type="Texture2D" uid="uid://b446i4ywagekt" path="res://Player/player.png" id="1_bgs2l"]
+[ext_resource type="Script" path="res://Enemies/enemyVariant/enemy.gd" id="1_puplg"]
 [ext_resource type="PackedScene" uid="uid://c3fkgjvbqshsw" path="res://Enemies/enemy_hurtbox.tscn" id="2_78kvf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vg3fg"]
@@ -13,8 +14,48 @@ height = 24.0
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1a64o"]
 radius = 9.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_quwns"]
+radius = 36.0139
+
+[sub_resource type="Animation" id="Animation_lsxjw"]
+resource_name = "attack"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemyHitbox/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_7ff5k"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemyHitbox/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_03b25"]
+_data = {
+"RESET": SubResource("Animation_7ff5k"),
+"attack": SubResource("Animation_lsxjw")
+}
+
 [node name="Enemy" type="CharacterBody2D"]
 collision_layer = 2
+script = ExtResource("1_puplg")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_bgs2l")
@@ -31,10 +72,23 @@ shape = SubResource("RectangleShape2D_vg3fg")
 [node name="CollisionShape2D" parent="EnemyHurtbox" index="0"]
 shape = SubResource("CapsuleShape2D_8mrd2")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="EnemyHitbox" type="Area2D" parent="."]
 position = Vector2(-24, -2)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHitbox"]
 shape = SubResource("CapsuleShape2D_1a64o")
+
+[node name="AttackProximity" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackProximity"]
+shape = SubResource("CircleShape2D_quwns")
+debug_color = Color(0.929412, 0.109804, 0.607843, 0.419608)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_03b25")
+}
+
+[connection signal="body_entered" from="AttackProximity" to="." method="_on_attack_proximity_body_entered"]
 
 [editable path="EnemyHurtbox"]
