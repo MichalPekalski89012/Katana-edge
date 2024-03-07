@@ -71,6 +71,9 @@ interact={
 2d_physics/layer_11="Player_low_hurtbox"
 2d_physics/layer_12="Player_mid_hurtbox"
 2d_physics/layer_13="Player_high_hurtbox"
+2d_physics/layer_14="Enemy_low_hitbox"
+2d_physics/layer_15="Enemy_mid_hitbox"
+2d_physics/layer_16="Enemy_high_hitbox"
 
 [rendering]
 
