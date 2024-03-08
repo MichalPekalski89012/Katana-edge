@@ -1,3 +1,4 @@
+class_name Player
 extends CharacterBody2D
 
 @export_category("ground movement")
@@ -16,6 +17,7 @@ extends CharacterBody2D
 @onready var jump_slide_timer = $JumpSlideTimer
 @onready var animation_player = $AnimationPlayer
 @onready var hurtbox = $Hurtbox
+@onready var hitbox = $Hitbox
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var direction = 0
@@ -36,8 +38,7 @@ var move_state = RUN
 func _physics_process(delta):
 	attack()
 	apply_gravity(delta)
-	direction = Input.get_axis("left", "right")
-
+	direction = Input.get_axis("left", "right") 
 	match move_state:
 		RUN: run_state(direction,delta)
 		CLIMB: climb_state()

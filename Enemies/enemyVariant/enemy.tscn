@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bvivhwk1q33vq"]
+[gd_scene load_steps=12 format=3 uid="uid://bvivhwk1q33vq"]
 
 [ext_resource type="Texture2D" uid="uid://b446i4ywagekt" path="res://Player/player.png" id="1_bgs2l"]
 [ext_resource type="Script" path="res://Enemies/enemyVariant/enemy.gd" id="1_puplg"]
@@ -53,6 +53,10 @@ _data = {
 "attack": SubResource("Animation_lsxjw")
 }
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q6b6x"]
+radius = 34.0
+height = 262.0
+
 [node name="Enemy" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_puplg")
@@ -89,6 +93,15 @@ libraries = {
 "": SubResource("AnimationLibrary_03b25")
 }
 
+[node name="ChaseProximity" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ChaseProximity"]
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_q6b6x")
+debug_color = Color(0.643137, 0.521569, 0.0470588, 0.419608)
+
 [connection signal="body_entered" from="AttackProximity" to="." method="_on_attack_proximity_body_entered"]
+[connection signal="body_entered" from="ChaseProximity" to="." method="_on_chase_proximity_body_entered"]
+[connection signal="body_exited" from="ChaseProximity" to="." method="_on_chase_proximity_body_exited"]
 
 [editable path="EnemyHurtbox"]
