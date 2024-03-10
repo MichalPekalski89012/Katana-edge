@@ -55,7 +55,7 @@ _data = {
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q6b6x"]
 radius = 34.0
-height = 262.0
+height = 134.0
 
 [node name="Enemy" type="CharacterBody2D"]
 collision_layer = 2
@@ -106,6 +106,7 @@ debug_color = Color(0.643137, 0.521569, 0.0470588, 0.419608)
 process_callback = 0
 wait_time = 2.0
 one_shot = true
+autostart = true
 
 [connection signal="body_entered" from="AttackProximity" to="." method="_on_attack_proximity_body_entered"]
 [connection signal="body_entered" from="ChaseProximity" to="." method="_on_chase_proximity_body_entered"]

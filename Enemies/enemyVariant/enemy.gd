@@ -7,6 +7,8 @@ extends CharacterBody2D
 
 @onready var state = PATROL
 
+ 
+
 enum {
 	PATROL,
 	CHASE
@@ -15,11 +17,13 @@ enum {
 var player
 var direction := Vector2.ZERO
 
+
+
+
 func _ready():
 	direction.x = 1.0
 
 func _physics_process(delta):
-
 	match state:
 		PATROL: patrol_state()
 		CHASE: chase_state()
@@ -28,8 +32,7 @@ func _physics_process(delta):
 
 func patrol_state():
 	velocity.x = move_toward(velocity.x, 50 * direction.x, 10)
-	if velocity.x >= 50 * direction.x:
-		direction.x -= direction.x
+	
 	move_and_slide()
 
 func chase_state():
@@ -51,7 +54,6 @@ func _on_chase_proximity_body_entered(body):
 
 
 func _on_chase_proximity_body_exited(body):
-	
 	state = PATROL
 
 
