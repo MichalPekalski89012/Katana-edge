@@ -246,5 +246,5 @@ position = Vector2(584, 116)
 position = Vector2(199, -9)
 
 [node name="EnemyHigh" parent="." instance=ExtResource("5_rnoxq")]
-position = Vector2(194, 100)
+position = Vector2(361, 100)
 collision_mask = 1

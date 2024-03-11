@@ -103,9 +103,7 @@ shape = SubResource("CapsuleShape2D_q6b6x")
 debug_color = Color(0.643137, 0.521569, 0.0470588, 0.419608)
 
 [node name="SwitchSideTimer" type="Timer" parent="."]
-process_callback = 0
-wait_time = 2.0
-one_shot = true
+wait_time = 3.0
 autostart = true
 
 [connection signal="body_entered" from="AttackProximity" to="." method="_on_attack_proximity_body_entered"]

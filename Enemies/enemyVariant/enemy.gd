@@ -5,6 +5,7 @@ extends CharacterBody2D
 @onready var sprite_2d = $Sprite2D
 @onready var switch_side_timer = $SwitchSideTimer
 
+
 @onready var state = PATROL
 
  
@@ -16,8 +17,7 @@ enum {
 
 var player
 var direction := Vector2.ZERO
-
-
+var will_flip = false
 
 
 func _ready():
@@ -31,8 +31,10 @@ func _physics_process(delta):
 
 
 func patrol_state():
-	velocity.x = move_toward(velocity.x, 50 * direction.x, 10)
-	
+	if not will_flip:
+		velocity.x = move_toward(velocity.x, 50, 10)
+	else:
+		velocity.x = move_toward(velocity.x, -50, 10)
 	move_and_slide()
 
 func chase_state():
@@ -58,5 +60,5 @@ func _on_chase_proximity_body_exited(body):
 
 
 func _on_switch_side_timer_timeout():
-	direction.x -= direction.x+1
-	print(direction.x)
+	will_flip = !will_flip
+	switch_side_timer.start()
