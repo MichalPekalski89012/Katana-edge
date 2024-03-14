@@ -36,7 +36,7 @@ enum {
 var move_state = RUN
 
 func _physics_process(delta):
-	attack()
+	attack(direction)
 	apply_gravity(delta)
 	direction = Input.get_axis("left", "right") 
 	match move_state:
@@ -128,16 +128,19 @@ func apply_gravity(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 
-func attack():
-	if Input.is_action_pressed("attack") and not is_on_floor():
-		animation_player.play("Player_high_attack")
-		
-	elif Input.is_action_pressed("attack") and move_state==SLIDE:
-		animation_player.play("Player_low_attack")
-		
-	elif Input.is_action_pressed("attack"):
-		animation_player.play("Player_mid_attack")
+func attack(direction):
+	if Input.is_action_just_pressed("attack"):
+		if direction == 1:
+			hitbox.position.x = 19
+		elif direction == -1:
+			hitbox.position.x = -19
 
+		if not is_on_floor():
+			animation_player.play("Player_high_attack")
+		elif move_state==SLIDE:
+			animation_player.play("Player_low_attack")
+		else:
+			animation_player.play("Player_mid_attack")
 
 func _on_hurtbox_area_entered(area):
 	print("zabili mnie!")
