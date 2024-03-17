@@ -4,7 +4,7 @@ extends CharacterBody2D
 @export_category("ground movement")
 @export var acceleration = 250.0
 @export var friction = 1500.0
-@export var slide_friction = 100.0
+@export var slide_friction = 50.0
 @export var max_speed = 150.0
 
 @export_category("air movement")
@@ -23,7 +23,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var direction = 0
 var was_on_floor
 var just_left_edge
-var just_slided = false
+var direction_before_slide
 
 enum {
 	RUN,
@@ -42,7 +42,7 @@ func _physics_process(delta):
 	match move_state:
 		RUN: run_state(direction,delta)
 		CLIMB: climb_state()
-		SLIDE: slide_state(delta)
+		SLIDE: slide_state(delta,direction)
 		JUMP: jump_state(delta)
 		JUMPSLIDE: jump_slide_state(direction,delta)
 
@@ -59,11 +59,10 @@ func run_state(direction,delta):
 			velocity.x = velocity.x
 			move_state = JUMP
 
-	if Input.is_action_pressed("down") and is_on_floor() and not just_slided:
+	if Input.is_action_pressed("down") and is_on_floor():
 		jump_slide_timer.start()
+		direction_before_slide = direction
 		move_state = SLIDE
-
-	just_slided = false
 
 	if direction:
 		if direction == -1:
@@ -82,7 +81,7 @@ func run_state(direction,delta):
 func climb_state():
 	pass
 
-func slide_state(delta):
+func slide_state(delta,direction):
 	hurtbox.collision_layer = 1024
 	hurtbox.collision_mask = 8192
 	print("sliduje!!!")
@@ -92,10 +91,13 @@ func slide_state(delta):
 		velocity.x = max_speed * direction * 2
 		velocity.y = jump_velocity
 		move_state = JUMPSLIDE
-	elif Input.is_action_just_released("down") and jump_slide_timer.time_left == 0.0:
-		just_slided = true
+		#odpuszczenie S w momencie gdy jump_slide_timer nie skonczyl odliczania zawiesza postac w SLIDE!!!
+	elif Input.is_action_just_pressed("jump") and jump_slide_timer.time_left == 0.0:
 		move_state = RUN
-		print(jump_slide_timer.time_left)
+	
+	elif direction != direction_before_slide:
+		print("canceluje slide")
+		move_state = RUN
 
 	move_and_slide()
 
@@ -144,3 +146,6 @@ func attack(direction):
 
 func _on_hurtbox_area_entered(area):
 	print("zabili mnie!")
+
+
+
