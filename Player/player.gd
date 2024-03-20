@@ -91,10 +91,10 @@ func slide_state(delta,direction):
 		velocity.x = max_speed * direction * 2
 		velocity.y = jump_velocity
 		move_state = JUMPSLIDE
-		#odpuszczenie S w momencie gdy jump_slide_timer nie skonczyl odliczania zawiesza postac w SLIDE!!!
+		
 	elif Input.is_action_just_pressed("jump") and jump_slide_timer.time_left == 0.0:
 		move_state = RUN
-	
+	#na ten moment to musi wystarczyc jesli chodzi o cancelowanie SLIDE:
 	elif direction != direction_before_slide:
 		print("canceluje slide")
 		move_state = RUN

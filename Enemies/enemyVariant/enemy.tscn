@@ -15,7 +15,7 @@ height = 24.0
 radius = 9.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_quwns"]
-radius = 36.0139
+radius = 46.0109
 
 [sub_resource type="Animation" id="Animation_7ff5k"]
 length = 0.001
@@ -78,7 +78,7 @@ shape = SubResource("RectangleShape2D_vg3fg")
 shape = SubResource("CapsuleShape2D_8mrd2")
 
 [node name="EnemyHitbox" type="Area2D" parent="."]
-position = Vector2(-24, -2)
+position = Vector2(-24, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHitbox"]
 shape = SubResource("CapsuleShape2D_1a64o")

@@ -4,6 +4,7 @@ extends CharacterBody2D
 @onready var animation_player = $AnimationPlayer
 @onready var sprite_2d = $Sprite2D
 @onready var switch_side_timer = $SwitchSideTimer
+@onready var enemy_hitbox = $EnemyHitbox
 
 
 @onready var state = PATROL
@@ -38,8 +39,12 @@ func patrol_state():
 	move_and_slide()
 
 func chase_state():
-	#uwzglednic skakanie przeciwnika!!!
+	var normalized_velocity = velocity.normalized()
 	direction = global_position.direction_to(player.global_position)
+	if normalized_velocity.x == 1:
+		enemy_hitbox.position.x = 24
+	elif normalized_velocity.x == -1:
+		enemy_hitbox.position.x = -24
 	sprite_2d.flip_h = direction.x < 0
 	velocity.x = 50 * direction.x
 	move_and_slide()
