@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cak341gjvmtw5"]
+
+[ext_resource type="Texture2D" uid="uid://fu8ucm5yt5qo" path="res://obstacles/ladder/ladder.png" id="1_b4xld"]
+
+[node name="LadderSprite" type="Sprite2D"]
+texture = ExtResource("1_b4xld")
