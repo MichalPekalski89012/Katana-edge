@@ -87,14 +87,13 @@ func run_state(horizontal_direction,delta):
 
 func climb_state(vertical_horizontal_direction,horizontal_direction):
 	velocity.y = 50 * vertical_direction
-	if horizontal_direction:
+	if horizontal_direction or not is_on_ladder():
 		move_state = RUN
 	move_and_slide()
 
 func slide_state(delta,horizontal_direction):
 	hurtbox.collision_layer = 1024
 	hurtbox.collision_mask = 8192
-	print("sliduje!!!")
 	velocity.x = move_toward(velocity.x, 0, slide_friction * delta)
 
 	if Input.is_action_just_pressed("jump") and jump_slide_timer.time_left > 0.0:
@@ -106,7 +105,6 @@ func slide_state(delta,horizontal_direction):
 		move_state = RUN
 	#na ten moment to musi wystarczyc jesli chodzi o cancelowanie SLIDE:
 	elif horizontal_direction != horizontal_direction_before_slide:
-		print("canceluje slide")
 		move_state = RUN
 
 	move_and_slide()
@@ -114,7 +112,6 @@ func slide_state(delta,horizontal_direction):
 func jump_slide_state(horizontal_direction,delta):
 	hurtbox.collision_layer = 4096
 	hurtbox.collision_mask = 32768
-	print("JUMP sliduje!!!")
 	if not is_on_floor():
 		apply_gravity(delta)
 		move_and_slide()

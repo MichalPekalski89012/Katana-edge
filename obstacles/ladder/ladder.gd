@@ -17,6 +17,3 @@ func _ready():
 		collision_shape_2d.position.y = -8 * n
 		collision_shape_2d.scale.y = n + 1
 
-
-func _on_body_entered(body):
-	print("gracz mnie dotknal")

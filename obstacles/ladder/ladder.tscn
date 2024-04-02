@@ -16,5 +16,3 @@ script = ExtResource("1_jhywn")
 position = Vector2(0, -72)
 scale = Vector2(1, 10)
 shape = SubResource("RectangleShape2D_ffpab")
-
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
