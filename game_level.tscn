@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://0o0txq77lgid"]
+[gd_scene load_steps=11 format=3 uid="uid://0o0txq77lgid"]
 
 [ext_resource type="Texture2D" uid="uid://bdoefbul37f6v" path="res://tilemapy.png" id="1_o8yuo"]
 [ext_resource type="PackedScene" uid="uid://bhrckvmm5qbe6" path="res://Player/player.tscn" id="2_pgpto"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://cwe2uvrxywod2" path="res://obstacles/arrowsTrap/arrows_rain.tscn" id="4_u5veb"]
 [ext_resource type="PackedScene" uid="uid://bk40vrrpa6kqk" path="res://Enemies/enemyVariant/enemy_high.tscn" id="5_rnoxq"]
 [ext_resource type="PackedScene" uid="uid://bt2pbq5qmmjlo" path="res://obstacles/ladder/ladder.tscn" id="6_r44jb"]
+[ext_resource type="PackedScene" uid="uid://c12g8flig78fd" path="res://Ui/DeathScreen/death_screen.tscn" id="7_5ars3"]
+[ext_resource type="PackedScene" uid="uid://c13ksxvm0lpmh" path="res://Enemies/enemyVariant/enemy_mid.tscn" id="8_2orfp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fjxyr"]
 texture = ExtResource("1_o8yuo")
@@ -252,4 +254,10 @@ collision_mask = 1
 
 [node name="Ladder" parent="." instance=ExtResource("6_r44jb")]
 position = Vector2(-35, 104)
-ladder_length = 4
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="DeathScreen" parent="CanvasLayer" instance=ExtResource("7_5ars3")]
+
+[node name="EnemyMid" parent="." instance=ExtResource("8_2orfp")]
+position = Vector2(195, 100)

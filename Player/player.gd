@@ -158,7 +158,8 @@ func is_on_ladder():
 	return true
 
 func _on_hurtbox_area_entered(area):
-	print("zabili mnie!")
+	print("umarlem")
+	GameManager.player_died.emit()
 
 
 

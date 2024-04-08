@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://qnufhqbhxdx3"]
+
+[ext_resource type="Script" path="res://game_manager.gd" id="1_knffc"]
+
+[node name="GameManager" type="Node"]
+script = ExtResource("1_knffc")
+
+[connection signal="level_completed" from="." to="." method="_on_level_completed"]
